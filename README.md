@@ -19,9 +19,9 @@ vellastra-fz/
 │   ├── web/
 │   │   ├── personal/                  # 📱 博客前台（用户端）
 │   │   ├── admin/                     # 📊 管理后台（管理员端）
-│   │   └── server-admin/              # 🖥️ 服务器管理后台
-│   ├── desktop/                       # 💻 Electron 桌面应用
-│   └── mobile/                        # 📱 跨平台移动端（Capacitor）
+│   │   └── server-admin/              # 🖥️ 服务器管理后台（脚手架）
+│   ├── desktop/                       # 💻 Electron 桌面应用（脚手架）
+│   └── mobile/                        # 📱 跨平台移动端（Capacitor 脚手架）
 │
 ├── pnpm-workspace.yaml                # 工作空间配置
 ├── tsconfig.base.json                 # 共享 TypeScript 配置
@@ -42,10 +42,9 @@ vellastra-fz/
 | **Vue Router** | 路由管理 |
 | **Axios** | HTTP 请求库 |
 | **Sass** | CSS 预处理器 |
-| **ECharts** | 数据可视化图表 |
+| **ECharts** | 数据可视化图表（仪表盘） |
+| **Tiptap** | Markdown/富文本编辑器 |
 | **pnpm** | 包管理器（workspace） |
-| **Electron** | 桌面应用框架 |
-| **Capacitor** | 跨平台移动端框架 |
 
 ---
 
@@ -59,7 +58,6 @@ vellastra-fz/
 ### 安装依赖
 
 ```bash
-# 安装所有 workspace 项目的依赖
 pnpm install
 ```
 
@@ -96,12 +94,6 @@ pnpm build:server-admin
 
 # 构建所有 Web 应用
 pnpm build:all
-
-# 构建桌面应用
-pnpm build:desktop
-
-# 构建移动端
-pnpm build:mobile
 ```
 
 ---
@@ -110,7 +102,7 @@ pnpm build:mobile
 
 ### 🏠 博客前台 (`apps/web/personal`)
 
-面向普通用户的博客前端，支持文章浏览、搜索、评论互动、用户注册登录和个人内容管理。
+面向普通用户的博客前端，支持文章浏览、分类筛选、评论互动、点赞、用户注册登录和个人内容管理（写文章 / 我的文章 / 个人中心）。
 
 **端口**: `5173`
 
@@ -120,38 +112,43 @@ pnpm build:mobile
 | `/article/:id` | 文章详情 | 查看文章内容、评论互动、点赞 |
 | `/login` | 登录 | 用户登录 |
 | `/register` | 注册 | 新用户注册 |
-| `/user/write` | 写文章 | 创建新文章 |
+| `/user/write` | 写文章 | 创建新文章（Tiptap 编辑器） |
 | `/user/write/:id` | 编辑文章 | 编辑已有文章 |
 | `/user/articles` | 我的文章 | 管理自己的文章 |
+| `/user/dashboard` | 个人管理 | 个人数据概览 |
 | `/user/profile` | 个人中心 | 修改个人信息 |
 
 ### 📊 管理后台 (`apps/web/admin`)
 
-面向管理员的综合管理后台，含仪表盘、内容管理、用户管理和系统设置。
+面向管理员的综合管理后台，覆盖内容管理、用户与权限、发布与运维等后端全部模块。
 
 **端口**: `5174`
 
 | 路径 | 页面 | 说明 |
 |------|------|------|
 | `/login` | 管理员登录 | 管理员身份认证 |
-| `/admin/dashboard` | 仪表盘 | 系统概览统计 |
-| `/admin/article/list` | 文章管理 | 管理所有文章 |
+| `/admin/dashboard` | 仪表盘 | 统计概览 + 趋势图表 + 热门文章 |
+| `/admin/article/list` | 文章管理 | 分页/搜索/置顶/发布/删除 |
 | `/admin/article/edit/:id` | 编辑文章 | 后台编辑文章 |
-| `/admin/category` | 分类管理 | 管理文章分类 |
-| `/admin/tag` | 标签管理 | 管理文章标签 |
-| `/admin/comment` | 评论管理 | 管理用户评论 |
-| `/admin/user` | 用户管理 | 管理系统用户 |
-| `/admin/setting` | 系统设置 | 系统参数配置 |
+| `/admin/category` | 分类管理 | 分类树管理 |
+| `/admin/tag` | 标签管理 | 标签增删改 |
+| `/admin/comment` | 评论管理 | 审核/删除评论 |
+| `/admin/user` | 用户管理 | 增删/启禁/重置密码/分配角色 |
+| `/admin/role` | 角色管理 | 角色 CRUD + 菜单权限分配 |
+| `/admin/menu` | 菜单管理 | 菜单树管理 |
+| `/admin/setting` | 系统设置 | 系统配置 + 友情链接 |
+| `/admin/publish` | 发布管理 | 发布站点 + 构建记录 |
+| `/admin/column` | 专栏管理 | 专栏 CRUD + 专栏文章管理 |
+| `/admin/recycle` | 回收站 | 恢复/永久删除/清空 |
+| `/admin/mail` | 邮件系统 | 订阅者 / 模板 / 发送记录 |
 
 ### 🖥️ 服务器管理 (`apps/web/server-admin`)
 
-面向运维人员的服务器监控面板，实时查看 CPU / 内存 / 磁盘等运行状态。
-
-**端口**: `5175`
+**脚手架就绪，待开发。**
 
 ### 💻 桌面应用 (`apps/desktop`)
 
-基于 Electron 的桌面客户端，可打包为 Windows / macOS / Linux 原生应用。
+Electron 脚手架（含 electron-builder 打包脚本），应用代码待开发。
 
 ```bash
 # 开发模式
@@ -166,17 +163,12 @@ pnpm build:linux  # Linux (.AppImage)
 
 ### 📱 移动端 (`apps/mobile`)
 
-基于 Capacitor 的跨平台移动应用，一套代码构建 Android 和 iOS 原生应用。
+Capacitor 脚手架（Android/iOS 壳已生成），应用代码待开发。
 
 ```bash
-# 同步 Android 项目
-pnpm --filter @vellastra/mobile android:sync
-
-# 在 Android Studio 中打开
-pnpm --filter @vellastra/mobile android:open
-
-# 构建 Android 应用
-pnpm --filter @vellastra/mobile android:build
+pnpm --filter @vellastra/mobile android:sync   # 同步 Android 项目
+pnpm --filter @vellastra/mobile android:open   # 在 Android Studio 中打开
+pnpm --filter @vellastra/mobile android:build  # 构建 Android 应用
 ```
 
 ---
@@ -186,41 +178,53 @@ pnpm --filter @vellastra/mobile android:build
 | 包名 | 路径 | 说明 |
 |------|------|------|
 | `@vellastra/shared` | `packages/shared/` | 共享类型定义、常量、日志工具 |
-| `@vellastra/api-core` | `packages/api-core/` | Axios 请求客户端、API 模块工厂函数 |
-| `@vellastra/ui` | `packages/ui/` | 通用 Vue 组件、紫色星辰主题 SCSS 变量 |
+| `@vellastra/api-core` | `packages/api-core/` | Axios 请求客户端、API 模块工厂（auth/user/article/category/comment/tag/setting/role/menu/file/publish/recycle/analytics/column/mail/idempotent） |
+| `@vellastra/ui` | `packages/ui/` | 通用 Vue 组件（StarField/TiptapEditor）、紫色星辰主题 SCSS 变量 |
 
 ---
 
 ## 🔧 代理配置
 
-各 Web 应用的 Vite 开发服务器均已配置代理，将请求转发到后端 Gateway：
+各 Web 应用的 Vite 开发服务器已将后端网关（`http://localhost:8080`）的请求路径全部代理转发，涵盖：
 
-| 路径前缀 | 代理目标 | 说明 |
-|---------|---------|------|
-| `/api/**` | `http://localhost:8080` | 业务接口（用户/文章/分类/评论等） |
-| `/auth/**` | `http://localhost:8080` | 鉴权接口（登录/注册/登出） |
+| 前缀 | 说明 |
+|------|------|
+| `/api/**` | 用户 / 文件接口 |
+| `/auth/**` | 鉴权接口 |
+| `/article` `/category` `/comment` `/tag` | 内容模块（无 `/api` 前缀） |
+| `/system` `/role` `/menu` `/user` | auth 服务管理接口 |
+| `/file` `/publish` `/recycle` `/analytics` `/column` `/mail` `/idempotent` | 二阶段模块 |
 
 ### 后端依赖
 
-本项目需要配合 **Vellastra 内容系统后端** 使用，启动前端前请确保后端正常运行：
+本项目需要配合 **Vellastra 内容系统后端** 使用，启动前端前请确保后端网关及各微服务正常运行（端口 8080 起）：
 
-- ✅ Nacos（服务注册中心，端口 8848）
-- ✅ MySQL（数据库，端口 3306）
-- ✅ Gateway 网关（端口 8080）
-- ✅ vellastra-auth 鉴权服务（端口 8081）
-- ✅ vellastra-user 用户服务（端口 8082）
-- ✅ vellastra-article 文章服务（端口 8083）
-- ✅ vellastra-category 分类服务（端口 8084）
-- ✅ vellastra-comment 评论服务（端口 8085）
+| 服务 | 端口 |
+|------|------|
+| Gateway 网关 | 8080 |
+| vellastra-auth（鉴权/RBAC/系统配置） | 8081 |
+| vellastra-user | 8082 |
+| vellastra-article | 8083 |
+| vellastra-category | 8084 |
+| vellastra-comment | 8085 |
+| vellastra-file | 8086 |
+| vellastra-tag | 8087 |
+| vellastra-publish | 8088 |
+| vellastra-recycle | 8089 |
+| vellastra-analytics | 8090 |
+| vellastra-column | 8091 |
+| vellastra-mail | 8092 |
+
+另需 MySQL / Redis / MinIO（文件存储）。
 
 ---
 
 ## 🔐 鉴权说明
 
 - **登录后**：服务端返回 JWT Token → 存储在 `localStorage` → 通过 `Authorization: Bearer <token>` 请求头发送
-- **用户标识**：通过 `X-User-Id` 请求头传递当前登录用户 ID
+- **用户识别**：网关解析 JWT 后自动注入 `X-User-Id` / `X-Username` / `X-Roles` 请求头，前端无需手动传递
 - **鉴权接口**：使用 `authRequest` 实例（`/auth` 前缀）
-- **业务接口**：使用 `request` 实例（`/api` 前缀）
+- **业务接口**：使用 `request` 实例（各模块路径与后端 Controller 对齐，部分无 `/api` 前缀）
 
 ---
 
