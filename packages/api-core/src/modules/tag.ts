@@ -4,7 +4,17 @@ export function createTagApi(request: AxiosInstance) {
   return {
     /** 获取标签列表 */
     getList() {
-      return request.get('/tag/list')
+      return request.get('/tag')
+    },
+
+    /** 热门标签 */
+    getHot(limit: number = 10) {
+      return request.get('/tag/hot', { params: { limit } })
+    },
+
+    /** 标签详情 */
+    getDetail(id: number) {
+      return request.get(`/tag/${id}`)
     },
 
     /** 创建标签 */

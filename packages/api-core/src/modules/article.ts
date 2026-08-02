@@ -61,6 +61,11 @@ export function createArticleApi(request: AxiosInstance) {
     /** 批量操作文章 */
     batch(ids: number[], action: 'delete' | 'publish') {
       return request.post('/article/batch', { ids, action })
+    },
+
+    /** 仪表盘数据（总览+热门文章） */
+    dashboard() {
+      return request.get('/article/dashboard')
     }
   }
 }
