@@ -1,5 +1,12 @@
 <template>
   <div class="home-page">
+    <!-- Feed 流切换（V3 社区） -->
+    <div class="feed-tabs">
+      <button class="feed-tab" :class="{ active: feedTab === 'latest' }" @click="switchFeed('latest')">最新</button>
+      <button class="feed-tab" :class="{ active: feedTab === 'hot' }" @click="switchFeed('hot')">热门</button>
+      <button class="feed-tab" :class="{ active: feedTab === 'following' }" @click="switchFeed('following')">关注</button>
+    </div>
+
     <!-- 分类筛选 -->
     <div class="filter-bar">
       <button
@@ -81,8 +88,11 @@ import { ref, onMounted, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { getArticleListApi, type Article } from '@/api/article'
 import { getCategoryTreeApi } from '@/api/category'
+import { getFeedLatestApi, getFeedHotApi, getFeedFollowingApi } from '@/api/feed'
 import dayjs from 'dayjs'
 import logger from '@/utils/logger'
+import { ElMessage } from 'element-plus'
+import { useUserStore } from '@/store/modules/user'
 import { AppIcon } from '@vellastra/ui'
 
 const route = useRoute()
@@ -96,6 +106,8 @@ const size = ref(10)
 const total = ref(0)
 const currentCategoryId = ref<number | undefined>(undefined)
 const keyword = ref('')
+const feedTab = ref<'latest' | 'hot' | 'following'>('latest')
+const userStore = useUserStore()
 
 function formatDate(date?: string) {
   return date ? dayjs(date).format('YYYY-MM-DD') : ''
@@ -158,6 +170,42 @@ async function fetchCategories() {
   }
 }
 
+function isFeedMode() {
+  return !currentCategoryId.value
+}
+
+async function fetchFeed() {
+  loading.value = true
+  try {
+    let res: any
+    if (feedTab.value === 'following') {
+      res = await getFeedFollowingApi({ current: current.value, size: size.value })
+    } else if (feedTab.value === 'hot') {
+      res = await getFeedHotApi({ current: current.value, size: size.value })
+    } else {
+      res = await getFeedLatestApi({ current: current.value, size: size.value })
+    }
+    const data = res.data
+    articles.value = data.records || []
+    total.value = data.total || 0
+  } catch {
+    articles.value = []
+  } finally {
+    loading.value = false
+  }
+}
+
+function switchFeed(tab: 'latest' | 'hot' | 'following') {
+  if (tab === 'following' && !userStore.token) {
+    ElMessage.warning('请先登录查看关注内容')
+    return
+  }
+  feedTab.value = tab
+  currentCategoryId.value = undefined
+  current.value = 1
+  fetchFeed()
+}
+
 function filterByCategory(id?: number) {
   currentCategoryId.value = id
   current.value = 1
@@ -166,7 +214,11 @@ function filterByCategory(id?: number) {
 
 function handlePageChange(page: number) {
   current.value = page
-  fetchArticles()
+  if (isFeedMode()) {
+    fetchFeed()
+  } else {
+    fetchArticles()
+  }
 }
 
 function goToDetail(id: number) {
@@ -188,9 +240,11 @@ watch(
 onMounted(() => {
   if (route.query.categoryId) {
     currentCategoryId.value = Number(route.query.categoryId)
+    fetchArticles()
+  } else {
+    fetchFeed()
   }
   fetchCategories()
-  fetchArticles()
 })
 </script>
 
@@ -198,6 +252,37 @@ onMounted(() => {
 .home-page {
   max-width: 900px;
   margin: 0 auto;
+}
+
+.feed-tabs {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.feed-tab {
+  padding: 6px 18px;
+  border-radius: 999px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: 1px solid rgba(45, 212, 191, 0.2);
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  color: rgba(255, 255, 255, 0.7);
+
+  &:hover {
+    border-color: rgba(45, 212, 191, 0.45);
+    color: #fff;
+  }
+
+  &.active {
+    background: linear-gradient(135deg, #0d9488, #2dd4bf);
+    border-color: transparent;
+    color: #fff;
+    box-shadow: 0 4px 14px rgba(13, 148, 136, 0.35);
+  }
 }
 
 .filter-bar {

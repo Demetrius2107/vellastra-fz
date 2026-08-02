@@ -40,6 +40,13 @@
         >
           {{ liked ? '已赞' : '点赞' }} {{ article.likeCount || 0 }}
         </el-button>
+        <el-button
+          :type="bookmarked ? 'primary' : 'default'"
+          @click="handleBookmark"
+          round
+        >
+          {{ bookmarked ? '已收藏' : '收藏' }}
+        </el-button>
       </div>
 
       <!-- 评论区 -->
@@ -134,7 +141,9 @@ import { ref, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 import { getArticleDetailApi, likeArticleApi, viewArticleApi, type Article } from '@/api/article'
 import { getCommentListApi, createCommentApi, replyCommentApi, type Comment } from '@/api/comment'
+import { bookmarkApi } from '@/api/interaction'
 import { useUserStore } from '@/store/modules/user'
+import { ElMessage } from 'element-plus'
 import dayjs from 'dayjs'
 import logger from '@/utils/logger'
 import { AppIcon, AppAvatar } from '@vellastra/ui'
@@ -173,6 +182,7 @@ const userStore = useUserStore()
 const article = ref<Article | null>(null)
 const loading = ref(false)
 const liked = ref(false)
+const bookmarked = ref(false)
 const renderedContent = ref('')
 
 // 评论
@@ -241,6 +251,20 @@ async function handleLike() {
     if (article.value) {
       article.value.likeCount = (article.value.likeCount || 0) + (liked.value ? 1 : -1)
     }
+  } catch {
+    // ignore
+  }
+}
+
+async function handleBookmark() {
+  if (!userStore.token) {
+    ElMessage.warning('请先登录')
+    return
+  }
+  try {
+    const res: any = await bookmarkApi(Number(route.params.id))
+    bookmarked.value = res.data?.bookmarked ?? !bookmarked.value
+    ElMessage.success(bookmarked.value ? '已收藏' : '已取消收藏')
   } catch {
     // ignore
   }

@@ -126,6 +126,12 @@ const routes = [
         name: 'AdminMail',
         component: () => import('@/views/mail/index.vue'),
         meta: { title: '邮件系统', icon: 'Message' }
+      },
+      {
+        path: 'audit',
+        name: 'AdminAudit',
+        component: () => import('@/views/audit/index.vue'),
+        meta: { title: '内容审核', icon: 'Stamp' }
       }
     ]
   },

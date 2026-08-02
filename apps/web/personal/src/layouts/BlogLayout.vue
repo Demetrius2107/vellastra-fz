@@ -45,6 +45,20 @@
           <span class="nav-label" v-show="!sidebarCollapsed">首页</span>
         </router-link>
 
+        <!-- V3 社区入口 -->
+        <router-link to="/community/questions" class="nav-item" :class="{ active: $route.path.startsWith('/community/questions') }">
+          <span class="nav-icon">💬</span>
+          <span class="nav-label" v-show="!sidebarCollapsed">问答社区</span>
+        </router-link>
+        <router-link to="/rank" class="nav-item" :class="{ active: $route.path === '/rank' }">
+          <span class="nav-icon">🏆</span>
+          <span class="nav-label" v-show="!sidebarCollapsed">排行榜</span>
+        </router-link>
+        <router-link to="/search" class="nav-item" :class="{ active: $route.path === '/search' }">
+          <span class="nav-icon">🔍</span>
+          <span class="nav-label" v-show="!sidebarCollapsed">搜索</span>
+        </router-link>
+
         <template v-if="userStore.token">
           <router-link to="/user/articles" class="nav-item" :class="{ active: $route.path.startsWith('/user/articles') }">
             <span class="nav-icon">📝</span>
@@ -57,6 +71,10 @@
           <router-link to="/user/profile" class="nav-item" :class="{ active: $route.path === '/user/profile' }">
             <span class="nav-icon">👤</span>
             <span class="nav-label" v-show="!sidebarCollapsed">个人中心</span>
+          </router-link>
+          <router-link to="/notifications" class="nav-item" :class="{ active: $route.path === '/notifications' }">
+            <span class="nav-icon">🔔</span>
+            <span class="nav-label" v-show="!sidebarCollapsed">通知中心</span>
           </router-link>
           <a v-if="userStore.userInfo.role === 'admin'" :href="adminUrl" target="_blank" rel="noopener" class="nav-item">
             <span class="nav-icon">⚙️</span>

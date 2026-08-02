@@ -6,7 +6,9 @@ import {
   paged, nextId, currentUser, users, categories, tags, articles, comments,
   roles, menus, roleMenuMap, userRoleMap, settings, friendLinks,
   publishSites, builds, recycles, columns, columnArticles,
-  subscribers, mailTemplates, sendLogs, trendData
+  subscribers, mailTemplates, sendLogs, trendData,
+  questions, answers, notifications, pendingItems, reports,
+  followingUsers, bookmarkedArticles, likedSet
 } from './data'
 
 type MockHandler = (params: any, query: any, body: any) => unknown
@@ -177,7 +179,57 @@ export const routes: MockRoute[] = [
   { method: 'get', pattern: /^\/mail\/send\/logs$/, handler: (_p, q) => paged(sendLogs, Number(q.current) || 1, Number(q.size) || 10) },
 
   // ================= 幂等 Token =================
-  { method: 'get', pattern: /^\/idempotent\/token$/, handler: () => ({ token: `mock-idem-${Date.now()}` }) }
+  { method: 'get', pattern: /^\/idempotent\/token$/, handler: () => ({ token: `mock-idem-${Date.now()}` }) },
+
+  // ================= V3 社区：内容流与排行 =================
+  { method: 'get', pattern: /^\/feed\/latest$/, handler: (_p, q) => paged([...articles].sort((a, b) => String(b.createdAt).localeCompare(String(a.createdAt))), Number(q.current) || 1, Number(q.size) || 10) },
+  { method: 'get', pattern: /^\/feed\/hot$/, handler: (_p, q) => paged([...articles].sort((a, b) => b.views - a.views), Number(q.current) || 1, Number(q.size) || 10) },
+  { method: 'get', pattern: /^\/feed\/recommend$/, handler: (_p, q) => paged([...articles].sort((a, b) => (b.likeCount || 0) - (a.likeCount || 0)), Number(q.current) || 1, Number(q.size) || 10) },
+  { method: 'get', pattern: /^\/feed\/following$/, handler: (_p, q) => paged(articles.filter((a) => followingUsers.has(a.authorId)), Number(q.current) || 1, Number(q.size) || 10) },
+  { method: 'get', pattern: /^\/rank\/(\w+)$/, handler: (p) => [...articles].sort((a, b) => (b.likeCount || 0) - (a.likeCount || 0)).slice(0, 10).map((a, i) => ({ rank: i + 1, id: a.id, title: a.title, authorName: a.authorName, views: a.views, likeCount: a.likeCount || 0, score: ((a.likeCount || 0) * 10) + a.views, period: p[0] })) },
+
+  // ================= V3 社区：问答 =================
+  { method: 'get', pattern: /^\/question$/, handler: (_p, q) => { let list = questions; if (q.keyword) list = list.filter((x) => x.title.includes(q.keyword)); return paged(list, Number(q.current) || 1, Number(q.size) || 10) } },
+  { method: 'get', pattern: /^\/question\/(\d+)$/, handler: (p) => { const q = questions.find((x) => x.id === Number(p[0])); return q ? { ...q, answers: answers.filter((a) => a.questionId === q.id) } : null } },
+  { method: 'post', pattern: /^\/question$/, handler: (_p, _q, body) => { const q = { id: nextId(), ...body, authorId: currentUser.id, authorName: currentUser.nickname, views: 0, likes: 0, answersCount: 0, solved: false, createdAt: '2026-08-03 00:00:00' }; questions.unshift(q); return q.id } },
+  { method: 'put', pattern: /^\/question\/(\d+)$/, handler: (p, _q, body) => { const q = questions.find((x) => x.id === Number(p[0])); if (q) Object.assign(q, body); return q } },
+  { method: 'delete', pattern: /^\/question\/(\d+)$/, handler: (p) => { const i = questions.findIndex((x) => x.id === Number(p[0])); if (i > -1) questions.splice(i, 1); return {} } },
+  { method: 'post', pattern: /^\/answer\/(\d+)\/accept$/, handler: (p) => { const a = answers.find((x) => x.id === Number(p[0])); if (a) { a.accepted = true; const q = questions.find((x) => x.id === a.questionId); if (q) q.solved = true } return a } },
+  { method: 'post', pattern: /^\/answer\/(\d+)\/vote$/, handler: (p, q) => { const a = answers.find((x) => x.id === Number(p[0])); if (a) a.votes += q.up === 'false' ? -1 : 1; return a } },
+  { method: 'put', pattern: /^\/answer\/(\d+)$/, handler: (p, _q, body) => { const a = answers.find((x) => x.id === Number(p[0])); if (a) Object.assign(a, body); return a } },
+  { method: 'post', pattern: /^\/answer$/, handler: (_p, _q, body) => { const a = { id: nextId(), ...body, authorId: currentUser.id, authorName: currentUser.nickname, accepted: false, votes: 0, createdAt: '2026-08-03 00:00:00' }; answers.unshift(a); const q = questions.find((x) => x.id === Number(body.questionId)); if (q) q.answersCount = (q.answersCount || 0) + 1; return a.id } },
+
+  // ================= V3 社区：互动与通知 =================
+  { method: 'post', pattern: /^\/interaction\/like$/, handler: (_p, q) => { const key = `${q.targetType}:${q.targetId}`; likedSet.has(key) ? likedSet.delete(key) : likedSet.add(key); return { liked: likedSet.has(key) } } },
+  { method: 'post', pattern: /^\/interaction\/follow$/, handler: (_p, q) => { followingUsers.add(Number(q.targetId)); return { following: true } } },
+  { method: 'delete', pattern: /^\/interaction\/follow$/, handler: (_p, q) => { followingUsers.delete(Number(q.targetId)); return { following: false } } },
+  { method: 'post', pattern: /^\/interaction\/bookmark$/, handler: (_p, q) => { const id = Number(q.articleId); bookmarkedArticles.has(id) ? bookmarkedArticles.delete(id) : bookmarkedArticles.add(id); return { bookmarked: bookmarkedArticles.has(id) } } },
+  { method: 'get', pattern: /^\/notification$/, handler: (_p, q) => { let list = notifications; if (q.unreadOnly === 'true') list = list.filter((n) => !n.read); return paged(list, Number(q.current) || 1, Number(q.size) || 10) } },
+  { method: 'patch', pattern: /^\/notification\/read-all$/, handler: () => { notifications.forEach((n) => { n.read = true }); return {} } },
+  { method: 'patch', pattern: /^\/notification\/(\d+)\/read$/, handler: (p) => { const n = notifications.find((x) => x.id === Number(p[0])); if (n) n.read = true; return n } },
+
+  // ================= V3 社区：审核与举报 =================
+  { method: 'get', pattern: /^\/audit\/pending$/, handler: (_p, q) => paged(pendingItems, Number(q.current) || 1, Number(q.size) || 10) },
+  { method: 'post', pattern: /^\/audit\/approve$/, handler: (_p, q) => { const i = pendingItems.findIndex((x) => x.id === Number(q.id)); if (i > -1) pendingItems.splice(i, 1); return {} } },
+  { method: 'post', pattern: /^\/audit\/reject$/, handler: (_p, q) => { const i = pendingItems.findIndex((x) => x.id === Number(q.id)); if (i > -1) pendingItems.splice(i, 1); return {} } },
+  { method: 'post', pattern: /^\/audit\/report$/, handler: () => ({}) },
+  { method: 'get', pattern: /^\/audit\/reports$/, handler: (_p, q) => paged(reports, Number(q.current) || 1, Number(q.size) || 10) },
+
+  // ================= V3 社区：搜索 =================
+  { method: 'get', pattern: /^\/search\/suggestion$/, handler: (_p, q) => ['Vue3', 'TypeScript', 'Vite', '架构'].filter((s) => s.toLowerCase().includes((q.keyword || '').toLowerCase())) },
+  { method: 'get', pattern: /^\/search$/, handler: (_p, q) => {
+    const kw = (q.keyword || '').toLowerCase()
+    const articleHits = articles.filter((a) => a.title.toLowerCase().includes(kw)).map((a) => ({ type: 'article', id: a.id, title: a.title, summary: a.summary, authorName: a.authorName }))
+    const questionHits = questions.filter((x) => x.title.toLowerCase().includes(kw)).map((x) => ({ type: 'question', id: x.id, title: x.title, summary: x.content, authorName: x.authorName }))
+    const userHits = users.filter((u) => u.username.toLowerCase().includes(kw) || u.nickname.toLowerCase().includes(kw)).map((u) => ({ type: 'user', id: u.id, title: u.nickname, summary: '@' + u.username, authorName: u.nickname }))
+    return { records: [...articleHits, ...questionHits, ...userHits], total: articleHits.length + questionHits.length + userHits.length }
+  } },
+
+  // ================= V3 社区：用户主页 =================
+  { method: 'get', pattern: /^\/user\/(\d+)\/stats$/, handler: (p) => { const uid = Number(p[0]); return { userId: uid, level: 3, exp: 1280, likesReceived: 240, totalViews: 5800, articlesCount: articles.filter((a) => a.authorId === uid).length, answersCount: answers.filter((a) => a.authorId === uid).length, followersCount: 36, followingCount: 12 } } },
+  { method: 'get', pattern: /^\/user\/(\d+)\/followers$/, handler: (_p, q) => paged(users.slice(1, 4), Number(q.current) || 1, Number(q.size) || 10) },
+  { method: 'get', pattern: /^\/user\/(\d+)\/following$/, handler: (_p, q) => paged(users.slice(2, 4), Number(q.current) || 1, Number(q.size) || 10) },
+  { method: 'get', pattern: /^\/user\/(\d+)\/profile$/, handler: (p) => { const uid = Number(p[0]); const u = users.find((x) => x.id === uid); return { ...u, articleCount: articles.filter((a) => a.authorId === uid).length, followersCount: 36, followingCount: 12, isFollowing: followingUsers.has(uid) } } }
 ]
 
 /** 匹配 mock 路由，返回 data；未匹配返回 null */

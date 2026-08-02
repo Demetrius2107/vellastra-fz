@@ -51,6 +51,27 @@ export function createUserApi(request: AxiosInstance) {
     /** 更新用户信息 */
     update(id: number, data: Partial<UserInfo>) {
       return request.put(`/api/user/${id}`, data)
+    },
+
+    // ===== V3 社区：用户主页（auth 服务 /user 前缀） =====
+    /** 用户主页（文章/回答/收藏） */
+    getUserProfile(userId: number) {
+      return request.get(`/user/${userId}/profile`)
+    },
+
+    /** 粉丝列表 */
+    getFollowers(userId: number, params: { current?: number; size?: number } = {}) {
+      return request.get(`/user/${userId}/followers`, { params })
+    },
+
+    /** 关注列表 */
+    getFollowing(userId: number, params: { current?: number; size?: number } = {}) {
+      return request.get(`/user/${userId}/following`, { params })
+    },
+
+    /** 用户统计（获赞/阅读量/等级） */
+    getUserStats(userId: number) {
+      return request.get(`/user/${userId}/stats`)
     }
   }
 }

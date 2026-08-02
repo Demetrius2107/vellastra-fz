@@ -66,6 +66,43 @@ const routes = [
         name: 'Profile',
         component: () => import('@/views/user/Profile.vue'),
         meta: { title: '个人中心', requiresAuth: true }
+      },
+      // ===== V3 社区 =====
+      {
+        path: 'community/questions',
+        name: 'Questions',
+        component: () => import('@/views/community/Questions.vue'),
+        meta: { title: '问答社区' }
+      },
+      {
+        path: 'community/questions/:id',
+        name: 'QuestionDetail',
+        component: () => import('@/views/community/QuestionDetail.vue'),
+        meta: { title: '问题详情' }
+      },
+      {
+        path: 'rank',
+        name: 'Rank',
+        component: () => import('@/views/community/Rank.vue'),
+        meta: { title: '排行榜' }
+      },
+      {
+        path: 'search',
+        name: 'Search',
+        component: () => import('@/views/community/Search.vue'),
+        meta: { title: '搜索' }
+      },
+      {
+        path: 'notifications',
+        name: 'Notifications',
+        component: () => import('@/views/user/Notifications.vue'),
+        meta: { title: '通知中心', requiresAuth: true }
+      },
+      {
+        path: 'user/:id',
+        name: 'UserHome',
+        component: () => import('@/views/user/UserHome.vue'),
+        meta: { title: '用户主页' }
       }
     ]
   },

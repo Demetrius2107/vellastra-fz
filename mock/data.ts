@@ -226,3 +226,40 @@ export function trendData(days: number, base: number): { stat_date: string; valu
   }
   return result
 }
+
+// ============ V3 社区：问答 ============
+export const questions: any[] = [
+  { id: 1, title: 'Vue3 中 ref 和 reactive 应该怎么选？', content: '最近在写项目，ref 和 reactive 都能做响应式，实际场景中如何取舍？', authorId: 3, authorName: '拾光者', tags: ['Vue3'], views: 128, likes: 12, answersCount: 2, solved: true, createdAt: '2026-07-20 10:00:00' },
+  { id: 2, title: 'pnpm workspace 如何优雅管理共享代码？', content: 'monorepo 下共享包怎么拆、怎么引用最合理？', authorId: 2, authorName: '夜航星', tags: ['工程化'], views: 96, likes: 8, answersCount: 1, solved: false, createdAt: '2026-07-25 14:00:00' },
+  { id: 3, title: 'Element Plus 主题定制踩坑记录', content: '想改主题色，有哪些坑需要注意？', authorId: 5, authorName: '云舒', tags: ['ElementPlus'], views: 75, likes: 5, answersCount: 0, solved: false, createdAt: '2026-07-30 09:30:00' }
+]
+
+export const answers: any[] = [
+  { id: 1, questionId: 1, authorId: 1, authorName: '星垂野管理员', content: '推荐优先用 ref：模板自动解包、类型推断更直观；reactive 适合嵌套对象，但要小心解构丢失响应式。', accepted: true, votes: 15, createdAt: '2026-07-20 11:00:00' },
+  { id: 2, questionId: 1, authorId: 2, authorName: '夜航星', content: '补充一点：reactive 对数组和 Map 支持更好，但全团队统一 ref 风格更容易维护。', accepted: false, votes: 6, createdAt: '2026-07-21 09:00:00' },
+  { id: 3, questionId: 2, authorId: 1, authorName: '星垂野管理员', content: '用 pnpm workspace + packages/ 共享库，应用通过 workspace:* 引用，像本项目的 api-core/shared/ui 就是范例。', accepted: false, votes: 9, createdAt: '2026-07-26 10:00:00' }
+]
+
+// ============ V3 社区：通知 ============
+export const notifications: any[] = [
+  { id: 1, type: 'like', content: '夜航星 赞了你的文章《Vue3 Composition API 深入理解》', fromUser: '夜航星', read: false, createdAt: '2026-08-02 20:00:00' },
+  { id: 2, type: 'comment', content: '拾光者 回复了你的评论', fromUser: '拾光者', read: false, createdAt: '2026-08-02 15:30:00' },
+  { id: 3, type: 'follow', content: '云舒 关注了你', fromUser: '云舒', read: false, createdAt: '2026-08-01 10:00:00' },
+  { id: 4, type: 'answer', content: '夜航星 回答了你的提问《pnpm workspace 如何优雅管理共享代码？》', fromUser: '夜航星', read: true, createdAt: '2026-07-26 10:05:00' },
+  { id: 5, type: 'like', content: '半盏清茶 赞了你的文章《微前端架构演进思考》', fromUser: '半盏清茶', read: true, createdAt: '2026-07-22 09:00:00' }
+]
+
+// ============ V3 社区：待审核 / 举报 ============
+export const pendingItems: any[] = [
+  { id: 101, type: 'article', title: '新文章：浅谈响应式设计的未来', authorName: '新用户A', createdAt: '2026-08-03 08:00:00' },
+  { id: 102, type: 'article', title: '推广内容测试', authorName: '新用户B', createdAt: '2026-08-03 09:00:00' }
+]
+
+export const reports: any[] = [
+  { id: 1, targetType: 'comment', targetId: 6, content: '垃圾广告信息', reporter: '拾光者', status: 0, createdAt: '2026-08-01 18:00:00' }
+]
+
+// ============ V3 社区：关注 / 收藏 / 点赞状态 ============
+export const followingUsers = new Set<number>([2, 5])
+export const bookmarkedArticles = new Set<number>([1, 6])
+export const likedSet = new Set<string>(['article:1', 'article:6'])
