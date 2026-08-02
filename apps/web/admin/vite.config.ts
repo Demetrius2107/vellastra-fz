@@ -4,6 +4,7 @@ import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import path from 'path'
+import { mockPlugin } from '../../mock/plugin'
 
 export default defineConfig({
   plugins: [
@@ -16,7 +17,9 @@ export default defineConfig({
     Components({
       resolvers: [ElementPlusResolver()],
       dts: 'src/components.d.ts'
-    })
+    }),
+    // 无后端时可开启 mock（VITE_USE_MOCK=false 关闭）
+    mockPlugin(process.env.VITE_USE_MOCK !== 'false')
   ],
   resolve: {
     alias: {
