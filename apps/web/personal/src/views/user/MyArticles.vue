@@ -196,10 +196,30 @@ onMounted(() => {
   --el-table-border-color: rgba(45, 212, 191, 0.12);
   --el-table-row-hover-bg-color: rgba(45, 212, 191, 0.08);
   --el-table-text-color: rgba(255, 255, 255, 0.8);
+  // 斑马纹行（element-plus 默认浅灰 #f5f7fa 接近白底）
+  --el-fill-color-lighter: rgba(255, 255, 255, 0.03);
+}
 
-  .el-table__row--striped td {
-    background: rgba(255, 255, 255, 0.03);
-  }
+:deep(.el-table__body tr.el-table__row--striped td.el-table__cell),
+:deep(.el-table__body tr.el-table__row--striped td) {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+// 固定列（操作列）背景透明，避免残留白底
+:deep(.el-table-fixed-column--right),
+:deep(.el-table__fixed-right),
+:deep(.el-table__fixed) {
+  background: transparent;
+}
+
+:deep(.el-table__fixed-right .el-table__body td.el-table__cell),
+:deep(.el-table__fixed .el-table__body td.el-table__cell) {
+  background: transparent;
+}
+
+:deep(.el-table__fixed-right .el-table__body tr.el-table__row--striped td.el-table__cell),
+:deep(.el-table__fixed .el-table__body tr.el-table__row--striped td.el-table__cell) {
+  background: rgba(255, 255, 255, 0.03);
 }
 
 .pagination-wrapper {

@@ -527,4 +527,75 @@ onMounted(() => {
   justify-content: center;
   margin-top: 16px;
 }
+
+// ===== 互动与评论区深色化（替代白底） =====
+:deep(.article-actions .el-button),
+:deep(.comment-section .el-button) {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(45, 212, 191, 0.2);
+  color: rgba(255, 255, 255, 0.85);
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.14);
+    border-color: rgba(45, 212, 191, 0.4);
+    color: #fff;
+  }
+
+  &.el-button--primary {
+    background: linear-gradient(135deg, #0d9488, #2dd4bf);
+    border-color: transparent;
+    color: #fff;
+
+    &:hover {
+      background: linear-gradient(135deg, #0f766e, #14b8a6);
+      box-shadow: 0 4px 14px rgba(13, 148, 136, 0.35);
+    }
+  }
+}
+
+:deep(.comment-section .el-textarea__inner) {
+  background: rgba(255, 255, 255, 0.06);
+  box-shadow: 0 0 0 1px rgba(45, 212, 191, 0.15) inset;
+  color: rgba(255, 255, 255, 0.85);
+  border-radius: 8px;
+
+  &::placeholder {
+    color: rgba(255, 255, 255, 0.35);
+  }
+
+  &:focus {
+    box-shadow: 0 0 0 1px rgba(45, 212, 191, 0.4) inset;
+  }
+}
+
+:deep(.comment-section .el-pagination) {
+  --el-pagination-bg-color: rgba(255, 255, 255, 0.06);
+  --el-pagination-text-color: rgba(255, 255, 255, 0.7);
+  --el-pagination-button-color: rgba(255, 255, 255, 0.7);
+  --el-pagination-hover-color: #2dd4bf;
+  --el-pagination-button-disabled-bg-color: transparent;
+}
+
+:deep(.comment-section .el-pager li),
+:deep(.comment-section .btn-prev),
+:deep(.comment-section .btn-next) {
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(45, 212, 191, 0.15);
+  border-radius: 8px;
+  color: rgba(255, 255, 255, 0.7);
+  margin: 0 3px;
+
+  &:hover {
+    color: #fff;
+    border-color: rgba(45, 212, 191, 0.4);
+  }
+
+  &.is-active {
+    background: linear-gradient(135deg, #0d9488, #2dd4bf);
+    border-color: transparent;
+    color: #fff;
+  }
+}
 </style>

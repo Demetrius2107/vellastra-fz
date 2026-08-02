@@ -60,10 +60,10 @@
             <span class="nav-icon">👤</span>
             <span class="nav-label" v-show="!sidebarCollapsed">个人中心</span>
           </router-link>
-          <router-link v-if="userStore.userInfo.role === 'admin'" to="/admin/dashboard" class="nav-item">
+          <a v-if="userStore.userInfo.role === 'admin'" :href="adminUrl" target="_blank" rel="noopener" class="nav-item">
             <span class="nav-icon">⚙️</span>
             <span class="nav-label" v-show="!sidebarCollapsed">后台管理</span>
-          </router-link>
+          </a>
         </template>
       </nav>
 
@@ -122,6 +122,9 @@ import { StarField } from '@vellastra/ui'
 const router = useRouter()
 const userStore = useUserStore()
 const sidebarCollapsed = ref(false)
+
+// 管理后台为独立应用，通过环境变量配置地址（默认开发端口 5174）
+const adminUrl = import.meta.env.VITE_ADMIN_URL || 'http://localhost:5174'
 
 function toggleSidebar() {
   sidebarCollapsed.value = !sidebarCollapsed.value

@@ -107,16 +107,20 @@ onMounted(() => {
 }
 
 .profile-card {
-  background: #fff;
-  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.06);
+  background-image: linear-gradient(135deg, rgba(13, 148, 136, 0.1) 0%, rgba(45, 212, 191, 0.04) 100%);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(45, 212, 191, 0.15);
+  border-radius: 12px;
   padding: 32px;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
 }
 
 .page-title {
   font-size: 22px;
   font-weight: 600;
-  color: $text-primary;
+  color: #fff;
   margin: 0 0 24px;
 }
 
@@ -126,18 +130,51 @@ onMounted(() => {
   gap: 20px;
   margin-bottom: 32px;
   padding-bottom: 24px;
-  border-bottom: 1px solid #f0f0f0;
+  border-bottom: 1px solid rgba(45, 212, 191, 0.15);
 }
 
 .avatar-info {
   .nickname {
     font-size: 18px;
     font-weight: 600;
-    color: $text-primary;
+    color: #fff;
   }
 
   .role-tag {
     margin-top: 4px;
+  }
+}
+
+// 表单深色化（替代白底输入框）
+:deep(.el-form-item__label) {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+:deep(.el-input__wrapper) {
+  background: rgba(255, 255, 255, 0.06);
+  box-shadow: 0 0 0 1px rgba(45, 212, 191, 0.15) inset;
+  border-radius: 8px;
+
+  &:hover,
+  &.is-focus {
+    box-shadow: 0 0 0 1px rgba(45, 212, 191, 0.4) inset;
+  }
+}
+
+:deep(.el-input__inner) {
+  color: #fff;
+
+  &::placeholder {
+    color: rgba(255, 255, 255, 0.35);
+  }
+}
+
+:deep(.el-input.is-disabled .el-input__wrapper) {
+  background: rgba(255, 255, 255, 0.04);
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.08) inset;
+
+  .el-input__inner {
+    color: rgba(255, 255, 255, 0.45);
   }
 }
 </style>
