@@ -187,13 +187,13 @@ onMounted(() => fetchData())
   gap: 16px;
   padding: 20px;
   background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(167, 139, 250, 0.12);
+  border: 1px solid rgba(45, 212, 191, 0.12);
   border-radius: 12px;
   transition: all 0.3s;
 
   &:hover {
     background: rgba(255, 255, 255, 0.1);
-    border-color: rgba(167, 139, 250, 0.25);
+    border-color: rgba(45, 212, 191, 0.25);
     transform: translateY(-2px);
   }
 
@@ -227,7 +227,7 @@ onMounted(() => fetchData())
   background: rgba(255, 255, 255, 0.04);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(167, 139, 250, 0.1);
+  border: 1px solid rgba(45, 212, 191, 0.1);
   border-radius: 12px;
   padding: 24px;
 }
@@ -246,10 +246,10 @@ onMounted(() => fetchData())
   }
 
   .view-all {
-    color: #a78bfa;
+    color: #2dd4bf;
     font-size: 13px;
     text-decoration: none;
-    &:hover { color: #c4b5fd; }
+    &:hover { color: #99f6e4; }
   }
 }
 
@@ -301,7 +301,7 @@ onMounted(() => fetchData())
       font-weight: 500;
       text-decoration: none;
       transition: color 0.2s;
-      &:hover { color: #a78bfa; }
+      &:hover { color: #2dd4bf; }
     }
   }
 
@@ -325,7 +325,7 @@ onMounted(() => fetchData())
     top: 4px;
     bottom: 4px;
     width: 2px;
-    background: linear-gradient(to bottom, rgba(167, 139, 250, 0.4), rgba(167, 139, 250, 0.05));
+    background: linear-gradient(to bottom, rgba(45, 212, 191, 0.4), rgba(45, 212, 191, 0.05));
     border-radius: 1px;
   }
 }
@@ -356,8 +356,8 @@ onMounted(() => fetchData())
     border-color: #fbbf24;
   }
   &.update {
-    background: rgba(167, 139, 250, 0.3);
-    border-color: #a78bfa;
+    background: rgba(45, 212, 191, 0.3);
+    border-color: #2dd4bf;
   }
 }
 

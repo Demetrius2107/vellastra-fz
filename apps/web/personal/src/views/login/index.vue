@@ -105,7 +105,7 @@ async function handleLogin() {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #0f0a1a 0%, #1a0a2e 50%, #0d1b2a 100%);
+  background: linear-gradient(135deg, #0b1220 0%, #0f172a 50%, #134e4a 100%);
   position: relative;
   overflow: hidden;
 }
@@ -116,9 +116,9 @@ async function handleLogin() {
   background: rgba(255, 255, 255, 0.04);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(167, 139, 250, 0.15);
+  border: 1px solid rgba(45, 212, 191, 0.15);
   border-radius: 16px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), 0 0 60px rgba(124, 58, 237, 0.1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), 0 0 60px rgba(13, 148, 136, 0.1);
   position: relative;
   z-index: 1;
 }
@@ -151,7 +151,7 @@ async function handleLogin() {
 .purple-input {
   :deep(.el-input__wrapper) {
     background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(167, 139, 250, 0.15);
+    border: 1px solid rgba(45, 212, 191, 0.15);
     box-shadow: none;
     border-radius: 10px;
     padding: 4px 16px;
@@ -163,14 +163,14 @@ async function handleLogin() {
     &::placeholder { color: rgba(255, 255, 255, 0.3); }
   }
   :deep(.el-input__prefix-inner) {
-    color: rgba(167, 139, 250, 0.5);
+    color: rgba(45, 212, 191, 0.5);
   }
   :deep(.el-input__wrapper:hover) {
-    border-color: rgba(167, 139, 250, 0.3);
+    border-color: rgba(45, 212, 191, 0.3);
   }
   :deep(.el-input__wrapper.is-focus) {
-    border-color: #7c3aed;
-    box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.15);
+    border-color: #0d9488;
+    box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.15);
   }
 }
 
@@ -179,15 +179,15 @@ async function handleLogin() {
   height: 46px;
   font-size: 16px;
   font-weight: 600;
-  background: linear-gradient(135deg, #7c3aed, #a78bfa);
+  background: linear-gradient(135deg, #0d9488, #2dd4bf);
   border: none;
   border-radius: 10px;
   letter-spacing: 4px;
   transition: all 0.3s;
 
   &:hover {
-    background: linear-gradient(135deg, #6d28d9, #7c3aed);
-    box-shadow: 0 4px 20px rgba(124, 58, 237, 0.4);
+    background: linear-gradient(135deg, #0d9488, #0d9488);
+    box-shadow: 0 4px 20px rgba(13, 148, 136, 0.4);
     transform: translateY(-1px);
   }
 }
@@ -204,7 +204,7 @@ async function handleLogin() {
     transition: color 0.2s;
 
     &:hover {
-      color: #a78bfa;
+      color: #2dd4bf;
     }
   }
 }

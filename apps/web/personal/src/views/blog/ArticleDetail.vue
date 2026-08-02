@@ -300,10 +300,14 @@ onMounted(() => {
 .article-detail-page {
   max-width: 800px;
   margin: 0 auto;
-  background: #fff;
-  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.06);
+  background-image: linear-gradient(135deg, rgba(13, 148, 136, 0.1) 0%, rgba(45, 212, 191, 0.04) 100%);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(45, 212, 191, 0.15);
+  border-radius: 16px;
   padding: 40px;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
 }
 
 .article-header {
@@ -335,7 +339,7 @@ onMounted(() => {
 .article-title {
   font-size: 28px;
   font-weight: 700;
-  color: $text-primary;
+  color: #fff;
   margin: 0 0 12px 0;
   line-height: 1.3;
 }
@@ -351,7 +355,7 @@ onMounted(() => {
   align-items: center;
   gap: 4px;
   font-size: 14px;
-  color: $text-secondary;
+  color: rgba(255, 255, 255, 0.55);
 
   .el-icon {
     font-size: 14px;
@@ -373,7 +377,7 @@ onMounted(() => {
 .article-content {
   font-size: 16px;
   line-height: 1.8;
-  color: $text-primary;
+  color: rgba(255, 255, 255, 0.85);
   margin-bottom: 32px;
   min-height: 200px;
 }
@@ -382,8 +386,8 @@ onMounted(() => {
   display: flex;
   justify-content: center;
   padding: 24px 0;
-  border-top: 1px solid $border-color;
-  border-bottom: 1px solid $border-color;
+  border-top: 1px solid rgba(45, 212, 191, 0.15);
+  border-bottom: 1px solid rgba(45, 212, 191, 0.15);
   margin-bottom: 32px;
 }
 
@@ -392,7 +396,7 @@ onMounted(() => {
     font-size: 18px;
     font-weight: 600;
     margin-bottom: 20px;
-    color: $text-primary;
+    color: #fff;
   }
 }
 
@@ -410,10 +414,11 @@ onMounted(() => {
 .login-tip {
   text-align: center;
   padding: 20px;
-  color: $text-secondary;
+  color: rgba(255, 255, 255, 0.6);
   font-size: 14px;
   margin-bottom: 24px;
-  background: #fafafa;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(45, 212, 191, 0.12);
   border-radius: 6px;
 
   a {
@@ -428,7 +433,7 @@ onMounted(() => {
 .no-comment {
   text-align: center;
   padding: 40px;
-  color: $text-secondary;
+  color: rgba(255, 255, 255, 0.5);
 }
 
 .comment-item {
@@ -437,7 +442,7 @@ onMounted(() => {
   padding: 16px 0;
 
   &:not(:last-child) {
-    border-bottom: 1px solid #f0f0f0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   }
 }
 
@@ -456,25 +461,25 @@ onMounted(() => {
 .comment-author {
   font-weight: 600;
   font-size: 14px;
-  color: $text-primary;
+  color: #fff;
 }
 
 .comment-time {
   font-size: 12px;
-  color: $text-secondary;
+  color: rgba(255, 255, 255, 0.5);
 }
 
 .comment-content {
   font-size: 14px;
   line-height: 1.6;
-  color: $text-regular;
+  color: rgba(255, 255, 255, 0.75);
   margin: 4px 0 8px;
 }
 
 .comment-actions {
   .reply-btn {
     font-size: 13px;
-    color: $text-secondary;
+    color: rgba(255, 255, 255, 0.5);
     cursor: pointer;
 
     &:hover {
@@ -486,7 +491,8 @@ onMounted(() => {
 .sub-comments {
   margin-top: 12px;
   padding: 12px;
-  background: #fafafa;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(45, 212, 191, 0.1);
   border-radius: 6px;
 }
 
@@ -494,16 +500,16 @@ onMounted(() => {
   padding: 8px 0;
 
   &:not(:last-child) {
-    border-bottom: 1px solid #f0f0f0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   }
 }
 
 .sub-comment-body {
   font-size: 14px;
-  color: $text-regular;
+  color: rgba(255, 255, 255, 0.75);
 
   strong {
-    color: $text-primary;
+    color: #fff;
   }
 
   p {

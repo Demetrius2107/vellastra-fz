@@ -71,7 +71,7 @@
       <div class="sidebar-footer">
         <template v-if="userStore.token">
           <router-link to="/user/write" class="write-btn">
-            <el-button type="primary" :circle="sidebarCollapsed" style="width: 100%; background: linear-gradient(135deg, #7c3aed, #a78bfa); border: none;">
+            <el-button type="primary" :circle="sidebarCollapsed" style="width: 100%; background: linear-gradient(135deg, #0d9488, #2dd4bf); border: none;">
               <span v-if="!sidebarCollapsed">✍️ 写文章</span>
               <span v-else>✍️</span>
             </el-button>
@@ -83,7 +83,7 @@
         </template>
         <template v-else>
           <router-link to="/login" class="write-btn">
-            <el-button type="primary" style="width: 100%; background: linear-gradient(135deg, #7c3aed, #a78bfa); border: none;">
+            <el-button type="primary" style="width: 100%; background: linear-gradient(135deg, #0d9488, #2dd4bf); border: none;">
               登录
             </el-button>
           </router-link>
@@ -139,7 +139,7 @@ function handleLogout() {
 .blog-layout {
   display: flex;
   min-height: 100vh;
-  background: linear-gradient(135deg, #0f0a1a 0%, #1a0a2e 30%, #0d1b2a 70%, #0a1628 100%);
+  background: linear-gradient(135deg, #0b1220 0%, #0f172a 30%, #134e4a 70%, #0a1628 100%);
   position: relative;
 }
 
@@ -153,7 +153,7 @@ function handleLogout() {
   background: rgba(30, 27, 75, 0.85);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border-right: 1px solid rgba(167, 139, 250, 0.15);
+  border-right: 1px solid rgba(45, 212, 191, 0.15);
   display: flex;
   flex-direction: column;
   z-index: 100;
@@ -167,7 +167,7 @@ function handleLogout() {
 
 .sidebar-header {
   padding: 20px 16px;
-  border-bottom: 1px solid rgba(167, 139, 250, 0.1);
+  border-bottom: 1px solid rgba(45, 212, 191, 0.1);
 
   .logo-link {
     display: flex;
@@ -186,7 +186,7 @@ function handleLogout() {
   .logo-text {
     font-size: 20px;
     font-weight: 700;
-    background: linear-gradient(135deg, #a78bfa, #fbbf24);
+    background: linear-gradient(135deg, #2dd4bf, #fbbf24);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -200,7 +200,7 @@ function handleLogout() {
   display: flex;
   flex-direction: column;
   align-items: center;
-  border-bottom: 1px solid rgba(167, 139, 250, 0.1);
+  border-bottom: 1px solid rgba(45, 212, 191, 0.1);
   gap: 12px;
 }
 
@@ -210,13 +210,13 @@ function handleLogout() {
 }
 
 .user-avatar {
-  border: 2px solid rgba(167, 139, 250, 0.4);
+  border: 2px solid rgba(45, 212, 191, 0.4);
   transition: all 0.3s;
-  background: linear-gradient(135deg, #7c3aed, #a78bfa);
+  background: linear-gradient(135deg, #0d9488, #2dd4bf);
 
   &:hover {
-    border-color: #a78bfa;
-    box-shadow: 0 0 20px rgba(167, 139, 250, 0.4);
+    border-color: #2dd4bf;
+    box-shadow: 0 0 20px rgba(45, 212, 191, 0.4);
   }
 
   &.guest {
@@ -239,9 +239,9 @@ function handleLogout() {
   }
 
   .login-link {
-    color: #a78bfa;
+    color: #2dd4bf;
     font-size: 13px;
-    &:hover { color: #c4b5fd; }
+    &:hover { color: #99f6e4; }
   }
 }
 
@@ -269,13 +269,13 @@ function handleLogout() {
 
   &:hover {
     color: #fff;
-    background: rgba(167, 139, 250, 0.12);
+    background: rgba(45, 212, 191, 0.12);
   }
 
   &.active {
     color: #fff;
-    background: linear-gradient(135deg, rgba(124, 58, 237, 0.3), rgba(167, 139, 250, 0.15));
-    box-shadow: inset 3px 0 0 #a78bfa;
+    background: linear-gradient(135deg, rgba(13, 148, 136, 0.3), rgba(45, 212, 191, 0.15));
+    box-shadow: inset 3px 0 0 #2dd4bf;
   }
 
   .nav-icon {
@@ -293,7 +293,7 @@ function handleLogout() {
 // ====== 底部 ======
 .sidebar-footer {
   padding: 16px 12px;
-  border-top: 1px solid rgba(167, 139, 250, 0.1);
+  border-top: 1px solid rgba(45, 212, 191, 0.1);
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -322,8 +322,8 @@ function handleLogout() {
     border: 1px solid rgba(255, 255, 255, 0.1);
     color: rgba(255, 255, 255, 0.5);
     &:hover {
-      background: rgba(167, 139, 250, 0.15);
-      color: #a78bfa;
+      background: rgba(45, 212, 191, 0.15);
+      color: #2dd4bf;
     }
   }
 }

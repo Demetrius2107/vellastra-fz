@@ -137,8 +137,27 @@ onMounted(async () => {
 .editor-wrapper {
   width: 100%;
   min-height: 400px;
-  border: 1px solid $border-color;
+  border: 1px solid rgba(45, 212, 191, 0.2);
   border-radius: $border-radius;
   overflow: hidden;
+}
+
+// 毛玻璃渐变卡片（替代白底）
+:deep(.el-card) {
+  background: rgba(255, 255, 255, 0.05);
+  background-image: linear-gradient(135deg, rgba(13, 148, 136, 0.08) 0%, rgba(45, 212, 191, 0.03) 100%);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(45, 212, 191, 0.15);
+  color: rgba(255, 255, 255, 0.85);
+}
+
+:deep(.el-card__header) {
+  border-bottom: 1px solid rgba(45, 212, 191, 0.12);
+  color: rgba(255, 255, 255, 0.9);
+}
+
+:deep(.el-form-item__label) {
+  color: rgba(255, 255, 255, 0.7);
 }
 </style>

@@ -215,17 +215,22 @@ onMounted(() => {
 }
 
 .article-card {
-  background: #fff;
-  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.06);
+  background-image: linear-gradient(135deg, rgba(13, 148, 136, 0.1) 0%, rgba(45, 212, 191, 0.04) 100%);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(45, 212, 191, 0.15);
+  border-radius: 12px;
   padding: 20px 24px;
   margin-bottom: 16px;
   cursor: pointer;
   transition: all 0.2s;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
 
   &:hover {
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border-color: rgba(45, 212, 191, 0.35);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
   }
 }
 
@@ -248,7 +253,7 @@ onMounted(() => {
 .article-title {
   font-size: 20px;
   font-weight: 600;
-  color: $text-primary;
+  color: #fff;
   margin: 0;
   line-height: 1.4;
 
@@ -258,7 +263,7 @@ onMounted(() => {
 }
 
 .article-summary {
-  color: $text-regular;
+  color: rgba(255, 255, 255, 0.65);
   font-size: 14px;
   line-height: 1.6;
   margin: 0 0 12px 0;
@@ -279,7 +284,7 @@ onMounted(() => {
   align-items: center;
   gap: 4px;
   font-size: 13px;
-  color: $text-secondary;
+  color: rgba(255, 255, 255, 0.5);
 
   .el-icon {
     font-size: 14px;

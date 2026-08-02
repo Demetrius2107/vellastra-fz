@@ -45,7 +45,7 @@ interface Star {
   glow: boolean
 }
 
-const starColors = ['#ffffff', '#fde68a', '#a78bfa', '#60a5fa', '#fbbf24']
+const starColors = ['#ffffff', '#fde68a', '#2dd4bf', '#60a5fa', '#fbbf24']
 
 const stars = computed<Star[]>(() => {
   const result: Star[] = []

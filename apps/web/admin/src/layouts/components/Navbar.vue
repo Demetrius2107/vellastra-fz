@@ -81,7 +81,7 @@ function handleCommand(command: string) {
     transition: color 0.2s;
 
     &:hover {
-      color: #a78bfa;
+      color: #2dd4bf;
     }
   }
 }
@@ -92,7 +92,7 @@ function handleCommand(command: string) {
   }
   :deep(.el-breadcrumb__inner.is-link) {
     color: rgba(255, 255, 255, 0.5);
-    &:hover { color: #a78bfa; }
+    &:hover { color: #2dd4bf; }
   }
   :deep(.el-breadcrumb__separator) {
     color: rgba(255, 255, 255, 0.2);
@@ -115,8 +115,8 @@ function handleCommand(command: string) {
   }
 
   .user-avatar {
-    border: 2px solid rgba(167, 139, 250, 0.3);
-    background: linear-gradient(135deg, #7c3aed, #a78bfa);
+    border: 2px solid rgba(45, 212, 191, 0.3);
+    background: linear-gradient(135deg, #0d9488, #2dd4bf);
   }
 
   .username {

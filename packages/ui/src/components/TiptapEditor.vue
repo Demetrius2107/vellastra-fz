@@ -154,7 +154,7 @@ onBeforeUnmount(() => {
 
 <style scoped>
 .tiptap-editor {
-  border: 1px solid rgba(167, 139, 250, 0.2);
+  border: 1px solid rgba(45, 212, 191, 0.2);
   border-radius: 10px;
   overflow: hidden;
   background: rgba(255, 255, 255, 0.06);
@@ -162,8 +162,8 @@ onBeforeUnmount(() => {
 }
 
 .tiptap-editor:focus-within {
-  border-color: #7c3aed;
-  box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.15);
+  border-color: #0d9488;
+  box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.15);
 }
 
 .editor-toolbar {
@@ -172,7 +172,7 @@ onBeforeUnmount(() => {
   align-items: center;
   gap: 2px;
   padding: 8px 12px;
-  border-bottom: 1px solid rgba(167, 139, 250, 0.1);
+  border-bottom: 1px solid rgba(45, 212, 191, 0.1);
   background: rgba(0, 0, 0, 0.15);
   user-select: none;
 }
@@ -190,7 +190,7 @@ onBeforeUnmount(() => {
 .toolbar-divider {
   width: 1px;
   height: 24px;
-  background: rgba(167, 139, 250, 0.15);
+  background: rgba(45, 212, 191, 0.15);
   margin: 0 4px;
 }
 
@@ -211,12 +211,12 @@ onBeforeUnmount(() => {
 }
 
 .toolbar-btn:hover {
-  background: rgba(167, 139, 250, 0.15);
+  background: rgba(45, 212, 191, 0.15);
   color: #fff;
 }
 
 .toolbar-btn.active {
-  background: #7c3aed;
+  background: #0d9488;
   color: #fff;
 }
 
@@ -293,10 +293,10 @@ onBeforeUnmount(() => {
 }
 
 .editor-content :deep(.ProseMirror blockquote) {
-  border-left: 3px solid #a78bfa;
+  border-left: 3px solid #2dd4bf;
   padding: 8px 16px;
   margin: 12px 0;
-  background: rgba(167, 139, 250, 0.08);
+  background: rgba(45, 212, 191, 0.08);
   border-radius: 0 8px 8px 0;
   color: rgba(255, 255, 255, 0.7);
   font-style: italic;
@@ -308,11 +308,11 @@ onBeforeUnmount(() => {
   border-radius: 4px;
   font-size: 13px;
   font-family: 'JetBrains Mono', 'Fira Code', monospace;
-  color: #a78bfa;
+  color: #2dd4bf;
 }
 
 .editor-content :deep(.ProseMirror pre) {
-  background: #1e1b4b;
+  background: #0f172a;
   color: #e5e7eb;
   padding: 16px 20px;
   border-radius: 8px;
@@ -336,14 +336,14 @@ onBeforeUnmount(() => {
 }
 
 .editor-content :deep(.ProseMirror a) {
-  color: #a78bfa;
+  color: #2dd4bf;
   text-decoration: underline;
   cursor: pointer;
 }
 
 .editor-content :deep(.ProseMirror hr) {
   border: none;
-  border-top: 1px solid rgba(167, 139, 250, 0.2);
+  border-top: 1px solid rgba(45, 212, 191, 0.2);
   margin: 24px 0;
 }
 

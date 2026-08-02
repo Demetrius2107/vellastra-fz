@@ -206,7 +206,7 @@ onMounted(() => {
   align-items: flex-start;
   margin-bottom: 28px;
   padding-bottom: 20px;
-  border-bottom: 1px solid rgba(167, 139, 250, 0.15);
+  border-bottom: 1px solid rgba(45, 212, 191, 0.15);
 
   .header-left {
     h2 {
@@ -238,18 +238,18 @@ onMounted(() => {
 }
 
 .publish-btn {
-  background: linear-gradient(135deg, #7c3aed, #a78bfa);
+  background: linear-gradient(135deg, #0d9488, #2dd4bf);
   border: none;
   &:hover {
-    background: linear-gradient(135deg, #6d28d9, #7c3aed);
-    box-shadow: 0 4px 16px rgba(124, 58, 237, 0.4);
+    background: linear-gradient(135deg, #0d9488, #0d9488);
+    box-shadow: 0 4px 16px rgba(13, 148, 136, 0.4);
   }
 }
 
 .title-input {
   :deep(.el-input__wrapper) {
     background: rgba(255, 255, 255, 0.06);
-    border: 1px solid rgba(167, 139, 250, 0.15);
+    border: 1px solid rgba(45, 212, 191, 0.15);
     box-shadow: none;
     border-radius: 10px;
     padding: 4px 16px;
@@ -275,7 +275,7 @@ onMounted(() => {
   :deep(.el-select__wrapper),
   :deep(.el-input__wrapper) {
     background: rgba(255, 255, 255, 0.06);
-    border: 1px solid rgba(167, 139, 250, 0.15);
+    border: 1px solid rgba(45, 212, 191, 0.15);
     box-shadow: none;
     border-radius: 8px;
   }
@@ -294,7 +294,7 @@ onMounted(() => {
 
 :deep(.el-textarea__inner) {
   background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(167, 139, 250, 0.15);
+  border: 1px solid rgba(45, 212, 191, 0.15);
   box-shadow: none;
   border-radius: 8px;
   color: rgba(255, 255, 255, 0.85);

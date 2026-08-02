@@ -61,8 +61,8 @@ const menuRoutes = computed(() => {
   background: transparent;
   --el-menu-bg-color: transparent;
   --el-menu-text-color: rgba(255, 255, 255, 0.65);
-  --el-menu-active-color: #a78bfa;
-  --el-menu-hover-bg-color: rgba(167, 139, 250, 0.1);
+  --el-menu-active-color: #2dd4bf;
+  --el-menu-hover-bg-color: rgba(45, 212, 191, 0.1);
   --el-menu-hover-text-color: #fff;
 }
 
@@ -73,13 +73,13 @@ const menuRoutes = computed(() => {
   transition: all 0.2s;
 
   &:hover {
-    background: rgba(167, 139, 250, 0.1);
+    background: rgba(45, 212, 191, 0.1);
     color: #fff;
   }
 
   &.is-active {
-    background: linear-gradient(135deg, rgba(124, 58, 237, 0.3), rgba(167, 139, 250, 0.15));
-    color: #a78bfa;
+    background: linear-gradient(135deg, rgba(13, 148, 136, 0.3), rgba(45, 212, 191, 0.15));
+    color: #2dd4bf;
     font-weight: 500;
   }
 }
@@ -91,7 +91,7 @@ const menuRoutes = computed(() => {
   transition: all 0.2s;
 
   &:hover {
-    background: rgba(167, 139, 250, 0.1);
+    background: rgba(45, 212, 191, 0.1);
     color: #fff;
   }
 }

@@ -135,7 +135,7 @@ ul, ol {
   background: $bg-card;
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(124, 58, 237, 0.1);
+  border: 1px solid rgba(13, 148, 136, 0.1);
   border-radius: $border-radius-lg;
   box-shadow: $shadow-md;
 }
@@ -153,10 +153,10 @@ ul, ol {
   font-weight: 500;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 2px 8px rgba(124, 58, 237, 0.3);
+  box-shadow: 0 2px 8px rgba(13, 148, 136, 0.3);
 
   &:hover {
-    box-shadow: 0 4px 16px rgba(124, 58, 237, 0.5);
+    box-shadow: 0 4px 16px rgba(13, 148, 136, 0.5);
     transform: translateY(-1px);
   }
 

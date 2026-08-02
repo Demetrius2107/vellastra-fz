@@ -36,14 +36,14 @@ const appStore = useAppStore()
 <style lang="scss" scoped>
 .main-layout {
   height: 100vh;
-  background: linear-gradient(135deg, #0f0a1a 0%, #1a0a2e 50%, #0d1b2a 100%);
+  background: linear-gradient(135deg, #0b1220 0%, #0f172a 50%, #134e4a 100%);
 }
 
 .admin-sidebar {
   background: linear-gradient(180deg, rgba(30, 27, 75, 0.9), rgba(46, 16, 101, 0.9));
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border-right: 1px solid rgba(167, 139, 250, 0.1);
+  border-right: 1px solid rgba(45, 212, 191, 0.1);
   transition: width 0.3s;
   overflow: hidden;
   display: flex;
@@ -51,7 +51,7 @@ const appStore = useAppStore()
 
   .sidebar-header {
     padding: 20px 16px;
-    border-bottom: 1px solid rgba(167, 139, 250, 0.1);
+    border-bottom: 1px solid rgba(45, 212, 191, 0.1);
     flex-shrink: 0;
 
     .logo-link {
@@ -71,7 +71,7 @@ const appStore = useAppStore()
     .logo-text {
       font-size: 18px;
       font-weight: 700;
-      background: linear-gradient(135deg, #a78bfa, #fbbf24);
+      background: linear-gradient(135deg, #2dd4bf, #fbbf24);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
@@ -83,7 +83,7 @@ const appStore = useAppStore()
 .el-header {
   padding: 0;
   background: rgba(255, 255, 255, 0.03);
-  border-bottom: 1px solid rgba(167, 139, 250, 0.08);
+  border-bottom: 1px solid rgba(45, 212, 191, 0.08);
   backdrop-filter: blur(12px);
 }
 

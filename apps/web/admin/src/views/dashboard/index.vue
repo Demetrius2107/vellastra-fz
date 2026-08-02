@@ -66,7 +66,7 @@ function initCharts() {
 
 function renderTrend(data: any) {
   const series = [
-    { name: '文章', key: 'articles', color: '#8b5cf6' },
+    { name: '文章', key: 'articles', color: '#14b8a6' },
     { name: '浏览', key: 'views', color: '#3b82f6' },
     { name: '用户', key: 'users', color: '#10b981' },
     { name: '评论', key: 'comments', color: '#f59e0b' }
