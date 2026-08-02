@@ -65,22 +65,27 @@ function initCharts() {
 }
 
 function renderTrend(data: any) {
-  const dates = (data?.dates || []).map((d: string) => d.slice(5))
-  const values = data?.article_publish || data?.total_views || data?.values || []
+  const series = [
+    { name: '文章', key: 'articles', color: '#8b5cf6' },
+    { name: '浏览', key: 'views', color: '#3b82f6' },
+    { name: '用户', key: 'users', color: '#10b981' },
+    { name: '评论', key: 'comments', color: '#f59e0b' }
+  ]
+  const first = data?.articles || data?.views || []
+  const dates = first.map((r: any) => String(r.stat_date).slice(5))
   lineChart?.setOption({
     tooltip: { trigger: 'axis' },
-    grid: { left: 40, right: 20, top: 30, bottom: 30 },
+    legend: { bottom: 0 },
+    grid: { left: 40, right: 20, top: 30, bottom: 40 },
     xAxis: { type: 'category', data: dates },
     yAxis: { type: 'value' },
-    series: [
-      {
-        type: 'line',
-        smooth: true,
-        data: values,
-        areaStyle: { opacity: 0.15 },
-        itemStyle: { color: '#8b5cf6' }
-      }
-    ]
+    series: series.map((s) => ({
+      name: s.name,
+      type: 'line',
+      smooth: true,
+      data: (data?.[s.key] || []).map((r: any) => r.value ?? 0),
+      itemStyle: { color: s.color }
+    }))
   })
 }
 
@@ -93,7 +98,7 @@ function renderCategory(data: any) {
       {
         type: 'pie',
         radius: ['40%', '65%'],
-        data: rows.map((r: any) => ({ name: r.name || r.categoryName, value: r.count ?? r.articleCount ?? 0 }))
+        data: rows.map((r: any) => ({ name: r.name || r.categoryName, value: r.article_count ?? r.articleCount ?? 0 }))
       }
     ]
   })
@@ -110,12 +115,12 @@ onMounted(async () => {
     ])
     const d = dashboardRes.data || {}
     statCards.value = [
-      { label: '文章总数', value: d.articleCount ?? 0 },
-      { label: '用户总数', value: d.userCount ?? 0 },
-      { label: '评论总数', value: d.commentCount ?? 0 },
+      { label: '文章总数', value: d.totalArticles ?? 0 },
+      { label: '用户总数', value: d.totalUsers ?? 0 },
+      { label: '评论总数', value: d.totalComments ?? 0 },
       { label: '总浏览量', value: d.totalViews ?? 0 },
-      { label: '分类数', value: d.categoryCount ?? 0 },
-      { label: '标签数', value: d.tagCount ?? 0 }
+      { label: '分类数', value: d.totalCategories ?? 0 },
+      { label: '标签数', value: d.totalTags ?? 0 }
     ]
     hotArticles.value = hotRes.data || []
     initCharts()
