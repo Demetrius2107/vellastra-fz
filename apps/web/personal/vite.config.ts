@@ -4,7 +4,7 @@ import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import path from 'path'
-import { mockPlugin } from '../../mock/plugin'
+import { mockPlugin } from '../../../mock/plugin'
 
 export default defineConfig({
   plugins: [
