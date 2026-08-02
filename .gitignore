@@ -4,9 +4,11 @@ dist-ssr
 dist-electron
 *.local
 .DS_Store
+.idea/
 auto-imports.d.ts
 components.d.ts
 *.log
+.env
 .env.local
 .env.*.local
 *.tsbuildinfo
