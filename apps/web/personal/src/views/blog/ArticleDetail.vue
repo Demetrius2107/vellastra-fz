@@ -9,15 +9,15 @@
         <h1 class="article-title">{{ article.title }}</h1>
         <div class="article-info">
           <span class="info-item">
-            <el-icon><User /></el-icon>
+            <AppIcon name="user" :size="14" />
             {{ article.authorName || '匿名' }}
           </span>
           <span class="info-item">
-            <el-icon><Clock /></el-icon>
+            <AppIcon name="clock" :size="14" />
             {{ formatDate(article.createdAt) }}
           </span>
           <span class="info-item">
-            <el-icon><View /></el-icon>
+            <AppIcon name="view" :size="14" />
             {{ article.views || 0 }} 次浏览
           </span>
         </div>
@@ -137,6 +137,7 @@ import { getCommentListApi, createCommentApi, replyCommentApi, type Comment } fr
 import { useUserStore } from '@/store/modules/user'
 import dayjs from 'dayjs'
 import logger from '@/utils/logger'
+import { AppIcon } from '@vellastra/ui'
 
 /**
  * 安全过滤 HTML，移除 script 标签、事件处理器属性及危险标签

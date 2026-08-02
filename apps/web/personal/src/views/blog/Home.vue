@@ -39,23 +39,23 @@
           <p class="article-summary">{{ article.summary || '暂无摘要' }}</p>
           <div class="card-meta">
             <span class="meta-item">
-              <el-icon><User /></el-icon>
+              <AppIcon name="user" :size="14" />
               {{ article.authorName || '匿名' }}
             </span>
             <span class="meta-item" v-if="article.categoryName">
-              <el-icon><Folder /></el-icon>
+              <AppIcon name="folder" :size="14" />
               {{ article.categoryName }}
             </span>
             <span class="meta-item">
-              <el-icon><View /></el-icon>
+              <AppIcon name="view" :size="14" />
               {{ article.views || 0 }}
             </span>
             <span class="meta-item">
-              <el-icon><ChatDotSquare /></el-icon>
+              <AppIcon name="comment" :size="14" />
               {{ article.commentCount || 0 }}
             </span>
             <span class="meta-item">
-              <el-icon><Clock /></el-icon>
+              <AppIcon name="clock" :size="14" />
               {{ formatDate(article.createdAt) }}
             </span>
           </div>
@@ -83,6 +83,7 @@ import { getArticleListApi, type Article } from '@/api/article'
 import { getCategoryTreeApi } from '@/api/category'
 import dayjs from 'dayjs'
 import logger from '@/utils/logger'
+import { AppIcon } from '@vellastra/ui'
 
 const route = useRoute()
 const router = useRouter()

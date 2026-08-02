@@ -142,10 +142,14 @@ onMounted(() => {
 .my-articles-page {
   max-width: 1000px;
   margin: 0 auto;
-  background: #fff;
-  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.06);
+  background-image: linear-gradient(135deg, rgba(13, 148, 136, 0.1) 0%, rgba(45, 212, 191, 0.04) 100%);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(45, 212, 191, 0.15);
+  border-radius: 12px;
   padding: 24px;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
 }
 
 .page-header {
@@ -154,7 +158,7 @@ onMounted(() => {
   h2 {
     font-size: 20px;
     font-weight: 600;
-    color: $text-primary;
+    color: #fff;
     margin: 0;
   }
 }
@@ -178,11 +182,63 @@ onMounted(() => {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+// 表格深色化（替代白底）
+:deep(.el-table) {
+  background: transparent;
+  color: rgba(255, 255, 255, 0.8);
+  --el-table-bg-color: transparent;
+  --el-table-tr-bg-color: transparent;
+  --el-table-header-bg-color: rgba(255, 255, 255, 0.06);
+  --el-table-header-text-color: rgba(255, 255, 255, 0.7);
+  --el-table-border-color: rgba(45, 212, 191, 0.12);
+  --el-table-row-hover-bg-color: rgba(45, 212, 191, 0.08);
+  --el-table-text-color: rgba(255, 255, 255, 0.8);
+
+  .el-table__row--striped td {
+    background: rgba(255, 255, 255, 0.03);
+  }
 }
 
 .pagination-wrapper {
   display: flex;
   justify-content: center;
   margin-top: 20px;
+
+  :deep(.el-pagination) {
+    --el-pagination-bg-color: rgba(255, 255, 255, 0.06);
+    --el-pagination-text-color: rgba(255, 255, 255, 0.7);
+    --el-pagination-button-color: rgba(255, 255, 255, 0.7);
+    --el-pagination-hover-color: #2dd4bf;
+    --el-pagination-button-disabled-bg-color: transparent;
+  }
+
+  :deep(.el-pager li),
+  :deep(.btn-prev),
+  :deep(.btn-next) {
+    background: rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(45, 212, 191, 0.15);
+    border-radius: 8px;
+    color: rgba(255, 255, 255, 0.7);
+    margin: 0 3px;
+    font-weight: 400;
+
+    &:hover {
+      color: #fff;
+      border-color: rgba(45, 212, 191, 0.4);
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    &.is-active {
+      background: linear-gradient(135deg, #0d9488, #2dd4bf);
+      border-color: transparent;
+      color: #fff;
+      box-shadow: 0 4px 12px rgba(13, 148, 136, 0.3);
+    }
+  }
 }
 </style>
