@@ -2,22 +2,22 @@
   <div class="home-page">
     <!-- 分类筛选 -->
     <div class="filter-bar">
-      <el-tag
-        :type="!currentCategoryId ? 'primary' : 'info'"
-        :effect="!currentCategoryId ? 'dark' : 'plain'"
+      <button
+        class="filter-btn"
+        :class="{ active: !currentCategoryId }"
         @click="filterByCategory()"
       >
         全部
-      </el-tag>
-      <el-tag
+      </button>
+      <button
         v-for="cat in categories"
         :key="cat.id"
-        :type="currentCategoryId === cat.id ? 'primary' : 'info'"
-        :effect="currentCategoryId === cat.id ? 'dark' : 'plain'"
+        class="filter-btn"
+        :class="{ active: currentCategoryId === cat.id }"
         @click="filterByCategory(cat.id)"
       >
         {{ cat.name }}
-      </el-tag>
+      </button>
     </div>
 
     <!-- 文章列表 -->
@@ -202,11 +202,33 @@ onMounted(() => {
 .filter-bar {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 10px;
   margin-bottom: 20px;
+}
 
-  .el-tag {
-    cursor: pointer;
+.filter-btn {
+  padding: 6px 16px;
+  border-radius: 999px;
+  font-size: 13px;
+  line-height: 1.4;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: 1px solid rgba(45, 212, 191, 0.2);
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  color: rgba(255, 255, 255, 0.7);
+
+  &:hover {
+    border-color: rgba(45, 212, 191, 0.45);
+    color: #fff;
+  }
+
+  &.active {
+    background: linear-gradient(135deg, #0d9488, #2dd4bf);
+    border-color: transparent;
+    color: #fff;
+    box-shadow: 0 4px 14px rgba(13, 148, 136, 0.35);
   }
 }
 
@@ -296,6 +318,41 @@ onMounted(() => {
   justify-content: center;
   margin-top: 24px;
   padding: 16px 0;
+
+  // 分页按钮毛玻璃化（替代白底）
+  :deep(.el-pagination) {
+    --el-pagination-bg-color: rgba(255, 255, 255, 0.06);
+    --el-pagination-text-color: rgba(255, 255, 255, 0.7);
+    --el-pagination-button-color: rgba(255, 255, 255, 0.7);
+    --el-pagination-hover-color: #2dd4bf;
+    --el-pagination-button-disabled-bg-color: transparent;
+  }
+
+  :deep(.el-pager li),
+  :deep(.btn-prev),
+  :deep(.btn-next) {
+    background: rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(45, 212, 191, 0.15);
+    border-radius: 8px;
+    color: rgba(255, 255, 255, 0.7);
+    margin: 0 3px;
+    font-weight: 400;
+
+    &:hover {
+      color: #fff;
+      border-color: rgba(45, 212, 191, 0.4);
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    &.is-active {
+      background: linear-gradient(135deg, #0d9488, #2dd4bf);
+      border-color: transparent;
+      color: #fff;
+      box-shadow: 0 4px 12px rgba(13, 148, 136, 0.3);
+    }
+  }
 }
 
 .empty-state {
