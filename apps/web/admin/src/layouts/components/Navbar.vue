@@ -14,9 +14,7 @@
     <div class="navbar-right">
       <el-dropdown trigger="click" @command="handleCommand">
         <span class="user-info">
-          <el-avatar :size="32" :src="userStore.userInfo.avatar || ''" class="user-avatar">
-            {{ userStore.userInfo.username?.charAt(0)?.toUpperCase() }}
-          </el-avatar>
+          <AppAvatar :size="32" :src="userStore.userInfo.avatar" :name="userStore.userInfo.username" class="user-avatar" />
           <span class="username">{{ userStore.userInfo.username || '管理员' }}</span>
           <el-icon><ArrowDown /></el-icon>
         </span>
@@ -38,6 +36,7 @@ import { useRoute, useRouter } from 'vue-router'
 import { useAppStore } from '@/store/modules/app'
 import { useUserStore } from '@/store/modules/user'
 import { ElMessageBox } from 'element-plus'
+import { AppAvatar } from '@vellastra/ui'
 
 const route = useRoute()
 const router = useRouter()

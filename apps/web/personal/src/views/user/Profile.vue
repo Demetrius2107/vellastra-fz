@@ -4,9 +4,7 @@
       <h2 class="page-title">个人中心</h2>
 
       <div class="avatar-section">
-        <el-avatar :size="80" :src="userStore.userInfo.avatar || ''">
-          {{ userStore.userInfo.username?.charAt(0)?.toUpperCase() }}
-        </el-avatar>
+        <AppAvatar :size="80" :src="userStore.userInfo.avatar" :name="userStore.userInfo.username" />
         <div class="avatar-info">
           <div class="nickname">{{ form.nickname || form.username }}</div>
           <div class="role-tag">
@@ -46,6 +44,7 @@ import { getUserInfoApi, updateUserApi } from '@/api/user'
 import { useUserStore } from '@/store/modules/user'
 import { ElMessage } from 'element-plus'
 import type { FormInstance, FormRules } from 'element-plus'
+import { AppAvatar } from '@vellastra/ui'
 
 const userStore = useUserStore()
 const formRef = ref<FormInstance>()

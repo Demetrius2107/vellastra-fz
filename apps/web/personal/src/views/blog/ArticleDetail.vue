@@ -71,7 +71,7 @@
           </div>
           <div v-for="comment in comments" :key="comment.id" class="comment-item">
             <div class="comment-avatar">
-              <el-avatar :size="36">{{ comment.authorName?.charAt(0) }}</el-avatar>
+              <AppAvatar :size="36" :name="comment.authorName" />
             </div>
             <div class="comment-body">
               <div class="comment-header">
@@ -137,7 +137,7 @@ import { getCommentListApi, createCommentApi, replyCommentApi, type Comment } fr
 import { useUserStore } from '@/store/modules/user'
 import dayjs from 'dayjs'
 import logger from '@/utils/logger'
-import { AppIcon } from '@vellastra/ui'
+import { AppIcon, AppAvatar } from '@vellastra/ui'
 
 /**
  * 安全过滤 HTML，移除 script 标签、事件处理器属性及危险标签

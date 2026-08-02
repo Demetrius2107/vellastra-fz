@@ -14,9 +14,7 @@
       <!-- 用户信息 -->
       <div class="user-profile" v-if="userStore.token">
         <div class="avatar-wrapper">
-          <el-avatar :size="sidebarCollapsed ? 40 : 64" :src="userStore.userInfo.avatar || ''" class="user-avatar">
-            {{ userStore.userInfo.username?.charAt(0)?.toUpperCase() }}
-          </el-avatar>
+          <AppAvatar :size="sidebarCollapsed ? 40 : 64" :src="userStore.userInfo.avatar" :name="userStore.userInfo.username" class="user-avatar" />
           <div class="avatar-ring" />
         </div>
         <div class="user-meta" v-show="!sidebarCollapsed">
@@ -32,7 +30,7 @@
       <!-- 未登录提示 -->
       <div class="user-profile" v-else>
         <div class="avatar-wrapper">
-          <el-avatar :size="sidebarCollapsed ? 40 : 64" icon="UserFilled" class="user-avatar guest" />
+          <AppAvatar :size="sidebarCollapsed ? 40 : 64" name="游客" class="user-avatar guest" />
         </div>
         <div class="user-meta" v-show="!sidebarCollapsed">
           <div class="user-name">游客</div>
@@ -117,7 +115,7 @@ import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useUserStore } from '@/store/modules/user'
 import { ElMessageBox } from 'element-plus'
-import { StarField } from '@vellastra/ui'
+import { StarField, AppAvatar } from '@vellastra/ui'
 
 const router = useRouter()
 const userStore = useUserStore()
