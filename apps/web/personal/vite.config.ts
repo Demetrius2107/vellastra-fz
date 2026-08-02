@@ -33,6 +33,66 @@ export default defineConfig({
       '/auth': {
         target: 'http://localhost:8080',
         changeOrigin: true
+      },
+      '/article': {
+        target: 'http://localhost:8080',
+        changeOrigin: true
+      },
+      '/category': {
+        target: 'http://localhost:8080',
+        changeOrigin: true
+      },
+      '/comment': {
+        target: 'http://localhost:8080',
+        changeOrigin: true
+      },
+      '/tag': {
+        target: 'http://localhost:8080',
+        changeOrigin: true
+      },
+      '/system': {
+        target: 'http://localhost:8080',
+        changeOrigin: true
+      },
+      '/role': {
+        target: 'http://localhost:8080',
+        changeOrigin: true
+      },
+      '/menu': {
+        target: 'http://localhost:8080',
+        changeOrigin: true
+      },
+      '/user': {
+        target: 'http://localhost:8080',
+        changeOrigin: true
+      },
+      '/file': {
+        target: 'http://localhost:8080',
+        changeOrigin: true
+      },
+      '/publish': {
+        target: 'http://localhost:8080',
+        changeOrigin: true
+      },
+      '/recycle': {
+        target: 'http://localhost:8080',
+        changeOrigin: true
+      },
+      '/analytics': {
+        target: 'http://localhost:8080',
+        changeOrigin: true
+      },
+      '/column': {
+        target: 'http://localhost:8080',
+        changeOrigin: true
+      },
+      '/mail': {
+        target: 'http://localhost:8080',
+        changeOrigin: true
+      },
+      '/idempotent': {
+        target: 'http://localhost:8080',
+        changeOrigin: true
       }
     }
   },
