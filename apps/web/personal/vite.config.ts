@@ -6,6 +6,10 @@ import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import path from 'path'
 import { mockPlugin } from '../../../mock/plugin'
 
+// mock 模式（默认开启）：无后端时由 mock 插件拦截 API 请求，此时禁用代理，
+// 避免前端路由导航（如 /user/articles）被误转发到后端
+const useMock = process.env.VITE_USE_MOCK !== 'false'
+
 export default defineConfig({
   plugins: [
     vue(),
@@ -18,8 +22,7 @@ export default defineConfig({
       resolvers: [ElementPlusResolver()],
       dts: 'src/components.d.ts'
     }),
-    // 无后端时可开启 mock（VITE_USE_MOCK=false 关闭）
-    mockPlugin(process.env.VITE_USE_MOCK !== 'false')
+    mockPlugin(useMock)
   ],
   resolve: {
     alias: {
@@ -28,76 +31,78 @@ export default defineConfig({
   },
   server: {
     port: 5173,
-    proxy: {
-      '/api': {
-        target: 'http://localhost:8080',
-        changeOrigin: true
-      },
-      '/auth': {
-        target: 'http://localhost:8080',
-        changeOrigin: true
-      },
-      '/article': {
-        target: 'http://localhost:8080',
-        changeOrigin: true
-      },
-      '/category': {
-        target: 'http://localhost:8080',
-        changeOrigin: true
-      },
-      '/comment': {
-        target: 'http://localhost:8080',
-        changeOrigin: true
-      },
-      '/tag': {
-        target: 'http://localhost:8080',
-        changeOrigin: true
-      },
-      '/system': {
-        target: 'http://localhost:8080',
-        changeOrigin: true
-      },
-      '/role': {
-        target: 'http://localhost:8080',
-        changeOrigin: true
-      },
-      '/menu': {
-        target: 'http://localhost:8080',
-        changeOrigin: true
-      },
-      '/user': {
-        target: 'http://localhost:8080',
-        changeOrigin: true
-      },
-      '/file': {
-        target: 'http://localhost:8080',
-        changeOrigin: true
-      },
-      '/publish': {
-        target: 'http://localhost:8080',
-        changeOrigin: true
-      },
-      '/recycle': {
-        target: 'http://localhost:8080',
-        changeOrigin: true
-      },
-      '/analytics': {
-        target: 'http://localhost:8080',
-        changeOrigin: true
-      },
-      '/column': {
-        target: 'http://localhost:8080',
-        changeOrigin: true
-      },
-      '/mail': {
-        target: 'http://localhost:8080',
-        changeOrigin: true
-      },
-      '/idempotent': {
-        target: 'http://localhost:8080',
-        changeOrigin: true
-      }
-    }
+    proxy: useMock
+      ? {}
+      : {
+          '/api': {
+            target: 'http://localhost:8080',
+            changeOrigin: true
+          },
+          '/auth': {
+            target: 'http://localhost:8080',
+            changeOrigin: true
+          },
+          '/article': {
+            target: 'http://localhost:8080',
+            changeOrigin: true
+          },
+          '/category': {
+            target: 'http://localhost:8080',
+            changeOrigin: true
+          },
+          '/comment': {
+            target: 'http://localhost:8080',
+            changeOrigin: true
+          },
+          '/tag': {
+            target: 'http://localhost:8080',
+            changeOrigin: true
+          },
+          '/system': {
+            target: 'http://localhost:8080',
+            changeOrigin: true
+          },
+          '/role': {
+            target: 'http://localhost:8080',
+            changeOrigin: true
+          },
+          '/menu': {
+            target: 'http://localhost:8080',
+            changeOrigin: true
+          },
+          '/user': {
+            target: 'http://localhost:8080',
+            changeOrigin: true
+          },
+          '/file': {
+            target: 'http://localhost:8080',
+            changeOrigin: true
+          },
+          '/publish': {
+            target: 'http://localhost:8080',
+            changeOrigin: true
+          },
+          '/recycle': {
+            target: 'http://localhost:8080',
+            changeOrigin: true
+          },
+          '/analytics': {
+            target: 'http://localhost:8080',
+            changeOrigin: true
+          },
+          '/column': {
+            target: 'http://localhost:8080',
+            changeOrigin: true
+          },
+          '/mail': {
+            target: 'http://localhost:8080',
+            changeOrigin: true
+          },
+          '/idempotent': {
+            target: 'http://localhost:8080',
+            changeOrigin: true
+          }
+        }
   },
   css: {
     preprocessorOptions: {

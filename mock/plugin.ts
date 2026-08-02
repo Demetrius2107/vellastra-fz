@@ -23,6 +23,13 @@ export function mockPlugin(enabled = true): Plugin {
           return next()
         }
 
+        // 页面导航请求（浏览器直接访问 /user/articles、/article/1 等前端路由）不是 API，
+        // 交给 vite 的 SPA fallback 返回 index.html，避免被代理或 mock 误处理
+        const accept = req.headers?.accept || ''
+        if (accept.includes('text/html')) {
+          return next()
+        }
+
         const query: Record<string, string> = {}
         url.searchParams.forEach((v, k) => { query[k] = v })
 

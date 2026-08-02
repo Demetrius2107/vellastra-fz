@@ -7,6 +7,12 @@ import logger from '@/utils/logger'
 NProgress.configure({ showSpinner: false })
 
 const routes = [
+  // 根路径 → 管理后台仪表盘（未登录由守卫跳登录页）
+  {
+    path: '/',
+    redirect: '/admin/dashboard'
+  },
+
   // 登录
   {
     path: '/login',
